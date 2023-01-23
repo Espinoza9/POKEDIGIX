@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
+
 @Setter
 public class Pokemon {
 
@@ -13,20 +14,28 @@ public class Pokemon {
     private float peso;
     private int felicidade;
     private int nivel;
+    private Ataque ataque;
 
     
-    public Pokemon(String nome, char genero, float altura, float peso, int felicidade, int nivel) throws FelicidadeInvalidaException, InvalidaAlturaException,PesoInvalidaException,NivelInvalidaException{
+    public Pokemon(String nome, char genero, float altura, float peso, int felicidade, int nivel, Ataque ataque) throws FelicidadeInvalidaException, InvalidaAlturaException,PesoInvalidaException,NivelInvalidaException, NaoPossuiAtaqueException{
         verificarFelicidadeEntreZeroECem(felicidade);
         verificarAlturaMenorQueZero(altura);
         verificarPesoMenorQueZero(peso);
         verificarNivelMenorQueZero(nivel);
+        verificarSePossuiAoMenosUmAtaque(ataque);
+        this.ataque = ataque;
         this.nome = nome;
         this.genero = genero;
         this.altura = altura;
         this.peso = peso;
         this.felicidade = felicidade;
         this.nivel = nivel;
+    }
         
+    private void verificarSePossuiAoMenosUmAtaque(Ataque ataque) throws NaoPossuiAtaqueException {
+        if(ataque == null) {
+            throw new NaoPossuiAtaqueException();
+        }
     }
     
         private void verificarFelicidadeEntreZeroECem(int felicidade) throws FelicidadeInvalidaException {
