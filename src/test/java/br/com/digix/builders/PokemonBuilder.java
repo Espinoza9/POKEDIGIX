@@ -1,5 +1,8 @@
 package br.com.digix.builders;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.digix.pokedigix.models.AcuraciaInvalidaException;
 import br.com.digix.pokedigix.models.Ataque;
 import br.com.digix.pokedigix.models.FelicidadeInvalidaException;
@@ -10,6 +13,7 @@ import br.com.digix.pokedigix.models.NivelInvalidaException;
 import br.com.digix.pokedigix.models.PesoInvalidaException;
 import br.com.digix.pokedigix.models.Pokemon;
 import br.com.digix.pokedigix.models.PontosDePoderInvalidaException;
+import br.com.digix.pokedigix.models.QuantidadesDeAtaquesInvalidaException;
 
 public class PokemonBuilder {
     private String nome = "pikachu";
@@ -18,11 +22,10 @@ public class PokemonBuilder {
     private float peso = 2.1f;
     private int felicidade = 70;
     private int nivel = 5;
-    private Ataque ataque ;
+    private List<Ataque> ataques = new ArrayList<>();
 
-    
-    public PokemonBuilder ()throws AcuraciaInvalidaException, PontosDePoderInvalidaException, ForcaInvalidaException{
-        this.ataque = new AtaqueBuilder().construir();
+    public PokemonBuilder() throws AcuraciaInvalidaException, PontosDePoderInvalidaException, ForcaInvalidaException {
+        this.ataques.add(new AtaqueBuilder().construir());
     }
 
     public PokemonBuilder comFelicidade(int felicidade) {
@@ -46,23 +49,23 @@ public class PokemonBuilder {
 
         return this;
     }
-        public PokemonBuilder semAtaque() {
 
-            this.ataque = null;
-            return  this ;
+    public PokemonBuilder semAtaque() {
 
-        }
-    
+        this.ataques = new ArrayList<>();
+        return this;
 
-    
-    public Pokemon construir()
-            throws FelicidadeInvalidaException, InvalidaAlturaException, PesoInvalidaException, NivelInvalidaException,NaoPossuiAtaqueException {
-        return new Pokemon(nome, genero, altura, peso, felicidade, nivel, ataque);
     }
 
-    
-    
+    public Pokemon construir()
+            throws FelicidadeInvalidaException, InvalidaAlturaException, PesoInvalidaException, NivelInvalidaException,
+            NaoPossuiAtaqueException, QuantidadesDeAtaquesInvalidaException {
+        return new Pokemon(nome, genero, altura, peso, felicidade, nivel, ataques);
+    }
 
-   
+    public PokemonBuilder comAtaques(List<Ataque> ataques) {
+        this.ataques = ataques;
+        return this;
+    }
 
 }
