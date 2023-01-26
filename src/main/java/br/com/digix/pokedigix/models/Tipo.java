@@ -4,14 +4,14 @@ import lombok.Getter;
 
 @Getter
 public class Tipo {
-    String nome = "eletrico";
-    String cor = "amarelo";
-    String simbolo="";
+    private String nome = "eletrico";
+    private String cor = "amarelo";
+    private byte [] simbolo;
 
-    public Tipo(String nome, String cor, String simbolo) {
+    public Tipo(String nome, String cor, byte[] simbolo) {
         this.nome = nome;
         this.cor = cor;
         this.simbolo = simbolo;
     }
-    
+
 }
