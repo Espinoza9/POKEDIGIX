@@ -20,5 +20,10 @@ public class TipoBuilder {
         return new Tipo(nome, cor, simbolo);
     }
 
+    public TipoBuilder comNome(String nome) {
+        this.nome = nome;
+        return this;
+    }
+
   
 }

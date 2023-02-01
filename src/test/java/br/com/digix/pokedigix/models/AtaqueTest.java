@@ -85,7 +85,7 @@ public class AtaqueTest {
     Tipo tipos = new TipoBuilder().construir();
      Ataque ataque = new AtaqueBuilder().comTipo(tipos).construir();
     
-    Assertions.assertEquals(tipos, ataque.getTipos());
+    Assertions.assertEquals(tipos, ataque.getTipo());
   }
   
 
