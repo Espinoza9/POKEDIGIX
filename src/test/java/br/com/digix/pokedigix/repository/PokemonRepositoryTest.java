@@ -1,7 +1,9 @@
 package br.com.digix.pokedigix.repository;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import br.com.digix.pokedigix.builders.PokemonBuilder;
+import br.com.digix.pokedigix.builders.TipoBuilder;
 import br.com.digix.pokedigix.models.Pokemon;
+import br.com.digix.pokedigix.models.Tipo;
 
 @DataJpaTest
 public class PokemonRepositoryTest {
@@ -46,5 +50,21 @@ public class PokemonRepositoryTest {
       Assertions.assertTrue(pokemonRetornado.contains(pokemon));
 
     }
+    @Test
+    public void deve_buscar_pelo_tipo()throws Exception{
+        List<Tipo> tipoGrama = Arrays.asList(new TipoBuilder().comNome("Grama").construir());
+        Pokemon bulbassauro = new PokemonBuilder().comNome("Bulbassauro").comTipo(tipoGrama).construir();
+
+        Pokemon pikachu = new PokemonBuilder().construir();
+
+        pokemonRepository.saveAll(Arrays.asList(bulbassauro,pikachu));
+
+        List<Pokemon> pokemons = pokemonRepository.findByTiposIn(tipoGrama);
+
+        Assertions.assertTrue(pokemons.contains(bulbassauro));
+        Assertions.assertFalse(pokemons.contains(pikachu));
+        Assertions.assertTrue(pokemons.stream().allMatch(pokemon -> pokemon.getTipos().containsAll(tipoGrama)));
+
+}
 
 }

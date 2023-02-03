@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import br.com.digix.pokedigix.builders.TipoBuilder;
-import br.com.digix.pokedigix.models.Pokemon;
 import br.com.digix.pokedigix.models.Tipo;
 
 @DataJpaTest
@@ -43,12 +42,12 @@ public class TipoRepositoryTest {
 
     @Test
     public void deve_buscar_pelo_nome() throws IOException {
-        String nome="water";
+        String nome = "water";
         Tipo tipo = new TipoBuilder().comNome(nome).construir();
         tipoRepository.save(tipo);
 
-      List<Tipo> tipoRetornado=  tipoRepository.findByNomeContainingIgnoreCase(nome);
-      Assertions.assertTrue(tipoRetornado.contains(tipo));
+        List<Tipo> tipoRetornado = tipoRepository.findByNomeContainingIgnoreCase(nome);
+        Assertions.assertTrue(tipoRetornado.contains(tipo));
 
     }
 }
