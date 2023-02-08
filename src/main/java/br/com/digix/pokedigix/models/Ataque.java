@@ -9,15 +9,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 @Entity
-@Getter
+@Getter@Setter
 @NoArgsConstructor
 public class Ataque {
      @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-     private long id;
+    @JsonInclude(Include.NON_NULL)
+    
+
+    private long id;
     private int forca;
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
@@ -25,7 +34,7 @@ public class Ataque {
     private String nome;
     private String descricao;
     private int pontosDePoder;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST )
     private Tipo tipo;
 
     public Ataque(int forca, Categoria categoria, int acuracia, String nome, String descricao, int pontosDePoder,

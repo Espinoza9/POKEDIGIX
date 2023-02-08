@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -18,17 +17,22 @@ import lombok.Setter;
 @Getter@Setter
 @Entity
 @NoArgsConstructor
+
+		
+	
 public class Tipo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonInclude(Include.NON_NULL)
     private Long id;
-    @Column(length = 60 , nullable = false)
+    
+   @Column(length = 20 , nullable = false)
     private String nome = "eletrico";
-    @Column(length = 7 , nullable = false)
+    @Column(length = 20 , nullable = false)
     private String cor = "amarelo";
     @Lob
     private byte [] simbolo;
+  
 
     public Tipo(String nome, String cor, byte[] simbolo) {
         this.nome = nome;

@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,6 +23,7 @@ import lombok.Setter;
 public class Pokemon {
      @Id
      @GeneratedValue(strategy = GenerationType.AUTO)
+     @JsonInclude(Include.NON_NULL)
     private Long id;
     private String nome;
     private char genero;
@@ -91,12 +95,12 @@ public class Pokemon {
         }
     }
 
-    public void verificarQuantidadesDeTipos(List<Tipo> tipos) throws QuantidadeDeTiposInvalidaException{
+    private  void verificarQuantidadesDeTipos(List<Tipo> tipos) throws QuantidadeDeTiposInvalidaException{
         if ( tipos.size() > 2 || tipos.size() <1){
             throw new QuantidadeDeTiposInvalidaException();
         }
     }
-    public void verificarSeVelocidadeMenorQueUm(int velocidade) throws VelocidadeInvalidaException{
+    private void verificarSeVelocidadeMenorQueUm(int velocidade) throws VelocidadeInvalidaException{
         if (velocidade <1){
             throw new VelocidadeInvalidaException();
         }
